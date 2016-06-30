@@ -57,8 +57,7 @@ gbm_m <- h2o.gbm(x = myX, y = myY, training_frame = train, validation_frame = va
 
 
 # GBM hyperparamters
-gbm_params1 <- list(learn_rate = c(0.01, 0.1),
-                    max_depth = c(3, 5, 9),
+gbm_params1 <- list(max_depth = c(3, 5, 9),
                     sample_rate = c(0.8, 1.0),
                     col_sample_rate = c(0.2, 0.5, 1.0))
 
@@ -67,7 +66,6 @@ gbm_grid1 <- h2o.grid("gbm", x = myX, y = myY,
                       grid_id = "gbm_grid1",
                       training_frame = train,
                       validation_frame = valid,
-                      ntrees = 100,
                       seed = 1,
                       hyper_params = gbm_params1)
 
@@ -90,14 +88,13 @@ gbm_params2 <- list(learn_rate = seq(0.01, 0.1, 0.01),
                     sample_rate = seq(0.5, 1.0, 0.1),
                     col_sample_rate = seq(0.1, 1.0, 0.1))
 search_criteria2 <- list(strategy = "RandomDiscrete", 
-                         max_models = 36)
+                         max_models = 5)
 
 # Train and validate a grid of GBMs
-gbm_grid2 <- h2o.grid("gbm", x = MyX, y = MyY,
+gbm_grid2 <- h2o.grid("gbm", x = myX, y = myY,
                       grid_id = "gbm_grid2",
                       training_frame = train,
                       validation_frame = valid,
-                      ntrees = 100,
                       seed = 1,
                       hyper_params = gbm_params2,
                       search_criteria = search_criteria2)
