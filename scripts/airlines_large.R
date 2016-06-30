@@ -1,3 +1,4 @@
+#EC2 Demo on airlines dataset
 library(h2o)
 h2o.init()
 
